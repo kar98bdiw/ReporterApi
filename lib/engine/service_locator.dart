@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:reporter_api/engine/app_manager.dart';
+import 'package:reporter_api/environment/environment.dart';
+import 'package:reporter_api/handlers/handler.dart';
 
 class ServiceLocator {
   static ServiceLocator serviceLocator = ServiceLocator._();
@@ -12,6 +14,7 @@ class ServiceLocator {
 
   setupServiceLocator() {
     _setupAppManagement();
+    _setupAppPackages();
   }
 
   T get<T extends Object>() {
@@ -24,5 +27,9 @@ class ServiceLocator {
 
   void _setupAppManagement() {
     _registerSingleton<AppManager>(AppManager());
+  }
+
+  void _setupAppPackages() {
+    _registerSingleton<Handler>(Handler(environment: Environment()));
   }
 }
