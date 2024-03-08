@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:reporter_api/environment/environment.dart';
 import 'package:reporter_api/handlers/base_handler.dart';
 import 'package:reporter_api/handlers/report_handler.dart';
+import 'package:reporter_api/repositories/report_repository.dart';
 
 class Handler {
   final Environment environment;
@@ -10,7 +11,8 @@ class Handler {
     required this.environment,
   });
 
-  BaseHandler reportHandler = ReportHandler();
+  BaseHandler reportHandler =
+      ReportHandler(reportRepository: ReportRepository());
 
   Future<void> on(HttpRequest request) async {
     switch (request.requestedUri.path) {
