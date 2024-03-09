@@ -33,6 +33,7 @@ abstract class BaseHandler {
     if (response.exception != null) {
       request.response.statusCode = response.exception!.statusCode;
     }
+    request.response.headers.contentType = ContentType.json;
     request.response.write(generateResponse(response));
     request.response.close();
   }
