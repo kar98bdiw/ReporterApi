@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:reporter_api/models/response/response.dart';
@@ -44,7 +45,7 @@ abstract class BaseHandler {
     return Response();
   }
 
-  Map<String, dynamic> generateResponse(Response response) {
+  String generateResponse(Response response) {
     Map<String, dynamic> responseData = {};
     if (response.data != null) {
       responseData['data'] = response.data;
@@ -52,7 +53,7 @@ abstract class BaseHandler {
     if (response.exception != null) {
       responseData['exception'] = response.exception!.toJson();
     }
-    return responseData;
+    return jsonEncode(responseData);
   }
 
   exception.Exception unknownMethodException() {
