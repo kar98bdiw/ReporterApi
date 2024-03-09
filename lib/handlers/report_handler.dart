@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:reporter_api/handlers/base_handler.dart';
+import 'package:reporter_api/models/response/response.dart';
 import 'package:reporter_api/repositories/report_repository.dart';
 
 class ReportHandler extends BaseHandler {
@@ -11,9 +12,9 @@ class ReportHandler extends BaseHandler {
   });
 
   @override
-  Future<Object?> execute(HttpRequest request) async {
-    return (await reportRepository.getAllReports())
-        .map((e) => e.toJson())
-        .toList();
+  Future<Response> get(HttpRequest request) async {
+    return Response(
+      data: 'Report',
+    );
   }
 }
