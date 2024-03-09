@@ -21,6 +21,7 @@ Exception _$ExceptionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Exception {
   String get message => throw _privateConstructorUsedError;
+  int get statusCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $ExceptionCopyWith<$Res> {
   factory $ExceptionCopyWith(Exception value, $Res Function(Exception) then) =
       _$ExceptionCopyWithImpl<$Res, Exception>;
   @useResult
-  $Res call({String message});
+  $Res call({String message, int statusCode});
 }
 
 /// @nodoc
@@ -50,12 +51,17 @@ class _$ExceptionCopyWithImpl<$Res, $Val extends Exception>
   @override
   $Res call({
     Object? message = null,
+    Object? statusCode = null,
   }) {
     return _then(_value.copyWith(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -68,7 +74,7 @@ abstract class _$$ExceptionImplCopyWith<$Res>
       __$$ExceptionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message});
+  $Res call({String message, int statusCode});
 }
 
 /// @nodoc
@@ -83,12 +89,17 @@ class __$$ExceptionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? statusCode = null,
   }) {
     return _then(_$ExceptionImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -96,17 +107,20 @@ class __$$ExceptionImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ExceptionImpl implements _Exception {
-  const _$ExceptionImpl({required this.message});
+  const _$ExceptionImpl({required this.message, this.statusCode = 500});
 
   factory _$ExceptionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExceptionImplFromJson(json);
 
   @override
   final String message;
+  @override
+  @JsonKey()
+  final int statusCode;
 
   @override
   String toString() {
-    return 'Exception(message: $message)';
+    return 'Exception(message: $message, statusCode: $statusCode)';
   }
 
   @override
@@ -114,12 +128,14 @@ class _$ExceptionImpl implements _Exception {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ExceptionImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, statusCode);
 
   @JsonKey(ignore: true)
   @override
@@ -136,13 +152,16 @@ class _$ExceptionImpl implements _Exception {
 }
 
 abstract class _Exception implements Exception {
-  const factory _Exception({required final String message}) = _$ExceptionImpl;
+  const factory _Exception(
+      {required final String message, final int statusCode}) = _$ExceptionImpl;
 
   factory _Exception.fromJson(Map<String, dynamic> json) =
       _$ExceptionImpl.fromJson;
 
   @override
   String get message;
+  @override
+  int get statusCode;
   @override
   @JsonKey(ignore: true)
   _$$ExceptionImplCopyWith<_$ExceptionImpl> get copyWith =>

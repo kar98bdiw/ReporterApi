@@ -7,6 +7,7 @@ part 'exception.g.dart';
 class Exception with _$Exception {
   const factory Exception({
     required String message,
+    @Default(500) int statusCode,
   }) = _Exception;
 
   factory Exception.fromJson(Map<String, Object?> json) =>

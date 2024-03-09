@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:reporter_api/handlers/base_handler.dart';
+import 'package:reporter_api/models/report/report.dart';
 import 'package:reporter_api/models/response/response.dart';
 import 'package:reporter_api/repositories/report_repository.dart';
 
@@ -14,7 +15,8 @@ class ReportHandler extends BaseHandler {
   @override
   Future<Response> get(HttpRequest request) async {
     return Response(
-      data: 'Report',
+      exception: generateException('message'),
+      data: Report(id: '', title: 'title', description: 'description').toJson(),
     );
   }
 }

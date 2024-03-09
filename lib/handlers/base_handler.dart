@@ -7,7 +7,7 @@ abstract class BaseHandler {
   Future<void> call(HttpRequest request) async {
     response(
       request: request,
-      data: await execute(request),
+      response: await execute(request),
     );
   }
 
@@ -27,9 +27,12 @@ abstract class BaseHandler {
 
   void response({
     required HttpRequest request,
-    Object? data,
+    required Response response,
   }) {
-    request.response.write(data);
+    if (response.exception != null) {
+      request.response.statusCode = response.exception!.statusCode;
+    }
+    request.response.write(generateResponse(response));
     request.response.close();
   }
 
@@ -41,7 +44,25 @@ abstract class BaseHandler {
     return Response();
   }
 
+  Map<String, dynamic> generateResponse(Response response) {
+    Map<String, dynamic> responseData = {};
+    if (response.data != null) {
+      responseData['data'] = response.data;
+    }
+    if (response.exception != null) {
+      responseData['exception'] = response.exception!.toJson();
+    }
+    return responseData;
+  }
+
   exception.Exception unknownMethodException() {
     return exception.Exception(message: 'Unknown message');
+  }
+
+  exception.Exception generateException(
+    String message, {
+    int statusCode = 500,
+  }) {
+    return exception.Exception(message: message, statusCode: statusCode);
   }
 }
