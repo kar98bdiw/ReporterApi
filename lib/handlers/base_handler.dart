@@ -67,4 +67,11 @@ abstract class BaseHandler {
   }) {
     return exception.Exception(message: message, statusCode: statusCode);
   }
+
+  Future<Map<String, dynamic>> getRequestData(HttpRequest request) async {
+    String jsonString =
+        await request.cast<List<int>>().transform(utf8.decoder).join();
+    var data = json.decode(jsonString);
+    return data;
+  }
 }

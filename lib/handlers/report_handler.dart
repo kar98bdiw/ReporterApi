@@ -20,4 +20,9 @@ class ReportHandler extends BaseHandler {
       data: Report(id: '', title: 'title', description: 'description').toJson(),
     );
   }
+
+  @override
+  Future<Response> post(HttpRequest request) async {
+    return Response();
+  }
 }
