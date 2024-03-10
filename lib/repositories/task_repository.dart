@@ -1,10 +1,14 @@
+import 'package:reporter_api/core/enum/task_status.dart';
+
 import '../core/models/task/task.dart';
 
 class TaskRepository {
-  Future<List<Task>> getTasks() async {
-    var tasks = <Task>[];
+  List<Task> tasks = [];
+
+  Future<void> fillTasks() async {
+    var tasksList = <Task>[];
     for (int i = 0; i <= 10; i++) {
-      tasks.add(
+      tasksList.add(
         Task(
           id: '$i',
           title: 'Task title $i',
@@ -12,6 +16,18 @@ class TaskRepository {
         ),
       );
     }
-    return tasks;
+    tasks = tasksList.toList();
+  }
+
+  Future<List<Task>> getTasks() async {
+    return tasks.toList();
+  }
+
+  Future<void> updateTask({
+    required String taskId,
+    required TaskStatus newStatus,
+  }) async {
+    var taskIndex = tasks.indexWhere((element) => element.id == taskId);
+    tasks[taskIndex] = tasks[taskIndex].copyWith(status: newStatus);
   }
 }

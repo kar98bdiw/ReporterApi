@@ -7,6 +7,7 @@ part 'report.g.dart';
 class Report with _$Report {
   const factory Report({
     required String id,
+    required String taskId,
     required String title,
     required String description,
   }) = _Report;

@@ -4,8 +4,6 @@ import 'package:reporter_api/environment/environment.dart';
 import 'package:reporter_api/handlers/base_handler.dart';
 import 'package:reporter_api/handlers/report_handler.dart';
 import 'package:reporter_api/handlers/task_handler.dart';
-import 'package:reporter_api/repositories/report_repository.dart';
-import 'package:reporter_api/repositories/task_repository.dart';
 
 class Handler {
   final Environment environment;
@@ -13,9 +11,8 @@ class Handler {
     required this.environment,
   });
 
-  BaseHandler reportHandler =
-      ReportHandler(reportRepository: ReportRepository());
-  BaseHandler taskHandler = TaskHandler(taskRepository: TaskRepository());
+  BaseHandler reportHandler = ReportHandler();
+  BaseHandler taskHandler = TaskHandler();
 
   Future<void> on(HttpRequest request) async {
     switch (request.requestedUri.path) {

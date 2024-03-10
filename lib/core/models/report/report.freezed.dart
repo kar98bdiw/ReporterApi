@@ -21,6 +21,7 @@ Report _$ReportFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Report {
   String get id => throw _privateConstructorUsedError;
+  String get taskId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
@@ -34,7 +35,7 @@ abstract class $ReportCopyWith<$Res> {
   factory $ReportCopyWith(Report value, $Res Function(Report) then) =
       _$ReportCopyWithImpl<$Res, Report>;
   @useResult
-  $Res call({String id, String title, String description});
+  $Res call({String id, String taskId, String title, String description});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
   @override
   $Res call({
     Object? id = null,
+    Object? taskId = null,
     Object? title = null,
     Object? description = null,
   }) {
@@ -58,6 +60,10 @@ class _$ReportCopyWithImpl<$Res, $Val extends Report>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -78,7 +84,7 @@ abstract class _$$ReportImplCopyWith<$Res> implements $ReportCopyWith<$Res> {
       __$$ReportImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, String description});
+  $Res call({String id, String taskId, String title, String description});
 }
 
 /// @nodoc
@@ -93,6 +99,7 @@ class __$$ReportImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? taskId = null,
     Object? title = null,
     Object? description = null,
   }) {
@@ -100,6 +107,10 @@ class __$$ReportImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -117,7 +128,10 @@ class __$$ReportImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReportImpl implements _Report {
   const _$ReportImpl(
-      {required this.id, required this.title, required this.description});
+      {required this.id,
+      required this.taskId,
+      required this.title,
+      required this.description});
 
   factory _$ReportImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReportImplFromJson(json);
@@ -125,13 +139,15 @@ class _$ReportImpl implements _Report {
   @override
   final String id;
   @override
+  final String taskId;
+  @override
   final String title;
   @override
   final String description;
 
   @override
   String toString() {
-    return 'Report(id: $id, title: $title, description: $description)';
+    return 'Report(id: $id, taskId: $taskId, title: $title, description: $description)';
   }
 
   @override
@@ -140,6 +156,7 @@ class _$ReportImpl implements _Report {
         (other.runtimeType == runtimeType &&
             other is _$ReportImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -147,7 +164,7 @@ class _$ReportImpl implements _Report {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description);
+  int get hashCode => Object.hash(runtimeType, id, taskId, title, description);
 
   @JsonKey(ignore: true)
   @override
@@ -166,6 +183,7 @@ class _$ReportImpl implements _Report {
 abstract class _Report implements Report {
   const factory _Report(
       {required final String id,
+      required final String taskId,
       required final String title,
       required final String description}) = _$ReportImpl;
 
@@ -173,6 +191,8 @@ abstract class _Report implements Report {
 
   @override
   String get id;
+  @override
+  String get taskId;
   @override
   String get title;
   @override
