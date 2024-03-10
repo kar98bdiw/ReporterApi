@@ -21,6 +21,8 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Task {
   String get id => throw _privateConstructorUsedError;
+  @TaskStatusConverter()
+  TaskStatus get status => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
@@ -34,7 +36,11 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String id, String title, String description});
+  $Res call(
+      {String id,
+      @TaskStatusConverter() TaskStatus status,
+      String title,
+      String description});
 }
 
 /// @nodoc
@@ -51,6 +57,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @override
   $Res call({
     Object? id = null,
+    Object? status = null,
     Object? title = null,
     Object? description = null,
   }) {
@@ -59,6 +66,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as TaskStatus,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -78,7 +89,11 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$TaskImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, String description});
+  $Res call(
+      {String id,
+      @TaskStatusConverter() TaskStatus status,
+      String title,
+      String description});
 }
 
 /// @nodoc
@@ -92,6 +107,7 @@ class __$$TaskImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? status = null,
     Object? title = null,
     Object? description = null,
   }) {
@@ -100,6 +116,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as TaskStatus,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -116,7 +136,10 @@ class __$$TaskImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TaskImpl implements _Task {
   const _$TaskImpl(
-      {required this.id, required this.title, required this.description});
+      {required this.id,
+      @TaskStatusConverter() this.status = TaskStatus.opened,
+      required this.title,
+      required this.description});
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskImplFromJson(json);
@@ -124,13 +147,17 @@ class _$TaskImpl implements _Task {
   @override
   final String id;
   @override
+  @JsonKey()
+  @TaskStatusConverter()
+  final TaskStatus status;
+  @override
   final String title;
   @override
   final String description;
 
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, description: $description)';
+    return 'Task(id: $id, status: $status, title: $title, description: $description)';
   }
 
   @override
@@ -139,6 +166,7 @@ class _$TaskImpl implements _Task {
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -146,7 +174,7 @@ class _$TaskImpl implements _Task {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, description);
+  int get hashCode => Object.hash(runtimeType, id, status, title, description);
 
   @JsonKey(ignore: true)
   @override
@@ -165,6 +193,7 @@ class _$TaskImpl implements _Task {
 abstract class _Task implements Task {
   const factory _Task(
       {required final String id,
+      @TaskStatusConverter() final TaskStatus status,
       required final String title,
       required final String description}) = _$TaskImpl;
 
@@ -172,6 +201,9 @@ abstract class _Task implements Task {
 
   @override
   String get id;
+  @override
+  @TaskStatusConverter()
+  TaskStatus get status;
   @override
   String get title;
   @override
