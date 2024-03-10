@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:reporter_api/models/response/response.dart';
-import '../models/exception/exception.dart' as exception;
+import '../core/models/exception/exception.dart' as exception;
+import '../core/models/response/response.dart';
 
 abstract class BaseHandler {
   Future<void> call(HttpRequest request) async {

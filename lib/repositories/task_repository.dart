@@ -1,4 +1,4 @@
-import '../models/task/task.dart';
+import '../core/models/task/task.dart';
 
 class TaskRepository {
   Future<List<Task>> getTasks() async {
